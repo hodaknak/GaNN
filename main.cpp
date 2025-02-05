@@ -52,7 +52,5 @@ public:
 int main() {
     NN model= NN({3, 20, 4}, {NN::relu, NN::sigmoid});
 
-    //std::cout << Eigen::MatrixXd(3, 3) * Eigen::VectorXd(1, 1, 1) << std::endl;
-
     std::cout << model.predict(Eigen::Vector3d(1, -1, 0)) << std::endl;
 }

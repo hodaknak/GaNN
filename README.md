@@ -1,0 +1,1 @@
+A very simple, feed forward neural network written in C++ for my future project. Only design for genetic algorithm.
