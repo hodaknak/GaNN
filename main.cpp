@@ -22,8 +22,6 @@ public:
     NN(const std::vector<int>& d, const std::vector<std::function<double(double)>> activation) {
         // initiatize layers
         dims = d;
-
-        std::srand((unsigned int) time(0));
         
         for (int i = 0; i < dims.size() - 1; i++) {
             layers.push_back({
@@ -68,15 +66,19 @@ public:
     }
 };
 
+void train() {
+    std::srand((unsigned int) time(0));
+    
+    std::vector<NN> models;
+    models.reserve(10);
+
+    for (int i = 0; i < 10; i++) {
+        models.push_back(NN({2, 3, 1}, {NN::relu, NN::sigmoid}));
+    }
+
+    
+}
+
 int main() {
-    NN model= NN({3, 20, 4}, {NN::relu, NN::sigmoid});
-
-    //model.visualize();
-    std::cout << model.predict(Eigen::Vector3d(1, -1, 0)) << std::endl;
-
-    model.mutate(0.1);
-
-    //model.visualize();
-
-    std::cout << model.predict(Eigen::Vector3d(1, -1, 0)) << std::endl;
+    train();
 }
