@@ -32,7 +32,7 @@ public:
         }
     }
 
-    Eigen::VectorXd predict(const Eigen::VectorXd& input) {
+    Eigen::VectorXd predict(const Eigen::VectorXd& input) const {
         // feed forward through the network
 
         Eigen::VectorXd y = std::move(input);
@@ -51,7 +51,7 @@ public:
         }
     }
 
-    void visualize() {
+    void visualize() const {
         for (int i = 0; i < layers.size(); i++) {
             std::cout << layers[i].weight.reshaped(1, layers[i].weight.rows() * layers[i].weight.cols()) << '\n' << layers[i].bias << '\n' << std::endl;
         }
@@ -66,19 +66,12 @@ public:
     }
 };
 
-void train() {
-    std::srand((unsigned int) time(0));
-    
-    std::vector<NN> models;
-    models.reserve(10);
-
-    for (int i = 0; i < 10; i++) {
-        models.push_back(NN({2, 3, 1}, {NN::relu, NN::sigmoid}));
-    }
-
-    
-}
-
 int main() {
-    train();
+    auto model = NN({2, 3, 1}, {NN::relu, NN::sigmoid});
+
+    std::cout << model.predict(Eigen::Vector2d(2, 3)) << std::endl;
+    
+    model.mutate(0.1);
+
+    std::cout << model.predict(Eigen::Vector2d(2, 3)) << std::endl;
 }
